@@ -383,6 +383,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Device Simulator
       objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -509,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e43cc78b62f2184d8bebe41bd574f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _connection: {fileID: 11400000, guid: f9362d07421034dfb849264cd50dca00, type: 2}
+  _connection: {fileID: 11400000, guid: 1ba6e1c5b72c84ffdab34a57eb127c2f, type: 2}
   _oscAddress: /tipsDistance
   _dataSource: {fileID: 5423332253655786680}
   _propertyName: value
