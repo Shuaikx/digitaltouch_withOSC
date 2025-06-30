@@ -31,6 +31,9 @@ public class HandsRelationManager : MonoBehaviour
         private set { _distance = value; } // 私有 set
     }
 
+    public MainUIControl UIControl;
+    public PassthroughManager passthroughManager;
+
     private void Update()
     {
         if (leftIndexTip != null && rightIndexTip != null)
@@ -46,6 +49,22 @@ public class HandsRelationManager : MonoBehaviour
             // {
             //     Debug.Log($"distance: {Distance}");
             // }
+
+            if (Distance <= 0.1f)
+            {
+                UIControl.SetHDR(false);
+                UIControl.SetPostProcessing(false);
+                UIControl.SetPassthrough(false);
+
+            }
+            else
+            {
+                UIControl.SetHDR(true);
+                UIControl.SetPostProcessing(true);
+                UIControl.SetPassthrough(true);
+            }
         }
     }
+
+    
 }

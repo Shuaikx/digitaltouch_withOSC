@@ -185,7 +185,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17683605}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fef98b642996046bfa3066fc3b42fab9, type: 3}
   m_Name: 
@@ -836,6 +836,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 1732320013}
   bloom: {fileID: 349125324}
+  fadeDuration: 1
+  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  isTransparent: 1
 --- !u!1 &114787420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,19 +1295,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 159203483}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 44161537210899533}
-        m_TargetAssemblyTypeName: Dual_VFX_UIControl, Assembly-CSharp
-        m_MethodName: ToggleFlame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &159203483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,7 +2800,6 @@ GameObject:
   - component: {fileID: 377429301}
   - component: {fileID: 377429300}
   - component: {fileID: 377429299}
-  - component: {fileID: 377429298}
   m_Layer: 0
   m_Name: TrailVFX
   m_TagString: Untagged
@@ -2825,29 +2815,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377429296}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 282758131}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &377429298
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377429296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ac596c74cd82a4c906be06f710c862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  check: 0
-  m_Property:
-    m_Name: EnableSpawn
-  Target: {fileID: 1630640467}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &377429299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2861,8 +2835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 377429298}
+  m_Bindings: []
   m_VisualEffect: {fileID: 377429301}
 --- !u!73398921 &377429300
 VFXRenderer:
@@ -2917,7 +2890,7 @@ VisualEffect:
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 4d637dba8c9ee443d848381ecfe29042, type: 3}
   m_InitialEventName: OnPositionChangeSpawn
-  m_InitialEventNameOverriden: 1
+  m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
@@ -11442,7 +11415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1025827681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13821,18 +13794,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 72844399}
         m_TargetAssemblyTypeName: MainUIControl, Assembly-CSharp
-        m_MethodName: ToggleHDR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1025827681}
-        m_TargetAssemblyTypeName: PassthroughManager, Assembly-CSharp
         m_MethodName: TogglePassthrough
         m_Mode: 1
         m_Arguments:
@@ -15686,7 +15647,7 @@ VisualEffect:
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 4d637dba8c9ee443d848381ecfe29042, type: 3}
   m_InitialEventName: OnPositionChangeSpawn
-  m_InitialEventNameOverriden: 1
+  m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1

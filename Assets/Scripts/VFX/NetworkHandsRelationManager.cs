@@ -50,7 +50,7 @@ public class NetworkHandsRelationManager : NetworkBehaviour
         networkIsFlameEnable.OnValueChanged -= onNetworkFlameEnableChange;
         networkIsParticleEnable.OnValueChanged -= onNetworkParticleEnableChange;
         networkIsTeapotEnable.OnValueChanged -= onNetworkTeapotEnableChange;
-        
+
         Dual_VFX_UIControl.OnFlameEnableChange -= onFlameEnableChangServerRpc;
         Dual_VFX_UIControl.OnTeapotEnableChange -= onTeapotEnableChangServerRpc;
         Dual_VFX_UIControl.OnParticleEnableChange -= onParticleEnableChangeServerRpc;
@@ -110,7 +110,7 @@ public class NetworkHandsRelationManager : NetworkBehaviour
     [ServerRpc(RequireOwnership =false)]
     private void onTeapotEnableChangServerRpc(bool state)
     {
-        networkIsFlameEnable.Value = state;
+        networkIsTeapotEnable.Value = state;
     }
 
     [ServerRpc(RequireOwnership = false)]

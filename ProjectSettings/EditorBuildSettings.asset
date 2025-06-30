@@ -21,6 +21,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/OscTest/OscTest.unity
     guid: 73dbb73c5d5e247b9b0d28498a1ad2d2
+  - enabled: 1
+    path: Assets/Scenes/Dual_VFX_test.unity
+    guid: 23bf84db33e26400aac4d3014e49d396
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 33a71767a0b87485abd417038d6d61d8,
       type: 2}

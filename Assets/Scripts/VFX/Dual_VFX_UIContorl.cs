@@ -5,7 +5,6 @@ using System;
 public class Dual_VFX_UIControl : MonoBehaviour
 {
     public BaseVFXControl Flame;
-
     public BaseVFXControl Particle;
     public BaseVFXControl Teapot;
 
@@ -44,7 +43,7 @@ public class Dual_VFX_UIControl : MonoBehaviour
 
     public void ToggleParticle()
     {
-        Particle.enabled = Particle.enabled;
+        Particle.enabled = !Particle.enabled;
         OnParticleEnableChange?.Invoke(Particle.enabled);
     }
 
