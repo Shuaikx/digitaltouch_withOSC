@@ -18,17 +18,20 @@ public class NetworkHandsRelationManager : NetworkBehaviour
     public static NetworkHandsRelationManager Instance { get; private set; }
     public NetworkVariable<bool> networkIsFlameEnable = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> networkIsParticleEnable = new NetworkVariable<bool>(false);
+    public NetworkVariable<bool> networkIsTeapotEnable = new NetworkVariable<bool>(false);
 
 
     public override void OnNetworkSpawn()
     {
         networkIsFlameEnable.OnValueChanged += onNetworkFlameEnableChange;
         networkIsParticleEnable.OnValueChanged += onNetworkParticleEnableChange;
+        networkIsTeapotEnable.OnValueChanged += onNetworkTeapotEnableChange;
         GameObject controllerObject = GameObject.Find("Dual VFX UI Controller");
         if (controllerObject)
         {
             vfxUIController = controllerObject.GetComponent<Dual_VFX_UIControl>();
             Dual_VFX_UIControl.OnFlameEnableChange += onFlameEnableChangServerRpc;
+            Dual_VFX_UIControl.OnTeapotEnableChange += onTeapotEnableChangServerRpc;
             Dual_VFX_UIControl.OnParticleEnableChange += onParticleEnableChangeServerRpc;
             Debug.Log("Find Dual VFX UI Controller");
         }
@@ -46,7 +49,10 @@ public class NetworkHandsRelationManager : NetworkBehaviour
     {
         networkIsFlameEnable.OnValueChanged -= onNetworkFlameEnableChange;
         networkIsParticleEnable.OnValueChanged -= onNetworkParticleEnableChange;
+        networkIsTeapotEnable.OnValueChanged -= onNetworkTeapotEnableChange;
+        
         Dual_VFX_UIControl.OnFlameEnableChange -= onFlameEnableChangServerRpc;
+        Dual_VFX_UIControl.OnTeapotEnableChange -= onTeapotEnableChangServerRpc;
         Dual_VFX_UIControl.OnParticleEnableChange -= onParticleEnableChangeServerRpc;
 
         if (IsOwner && Instance == this)
@@ -100,16 +106,28 @@ public class NetworkHandsRelationManager : NetworkBehaviour
     {
         networkIsFlameEnable.Value = state;
     }
-
+    
     [ServerRpc(RequireOwnership =false)]
+    private void onTeapotEnableChangServerRpc(bool state)
+    {
+        networkIsFlameEnable.Value = state;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     private void onParticleEnableChangeServerRpc(bool state)
     {
         networkIsParticleEnable.Value = state;
     }
+    
+    private void onNetworkTeapotEnableChange(bool previousState, bool currentState)
+    {
+        if(IsOwner)
+            vfxUIController.SetTeapot(currentState);
+    }
 
     private void onNetworkFlameEnableChange(bool previousState, bool currentState)
     {
-        if(IsOwner)
+        if (IsOwner)
             vfxUIController.SetFlame(currentState);
     }
 

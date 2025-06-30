@@ -3,21 +3,23 @@ using UnityEngine.VFX;
 
 public class FlameControl : BaseVFXControl 
 {
-    public VisualEffect Flame;
-    public float baseScale = 0.01f;
-    [Tooltip("Sensitivity")]
-    public float scaleSensitivity = 0.5f;
+    public VisualEffect Flame1;
+    public VisualEffect Flame2;
+    [Tooltip("for test")]
+    public float FlameEnableRange = 0.1f;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        Flame.enabled = true;
+        Flame1.enabled = true;
+        Flame2.enabled = true;
         Debug.Log("Flame is disabled");
     }
 
     protected override void OnDisable()
     {
-        Flame.enabled = false;
+        Flame1.enabled = false;
+        Flame2.enabled = false;
         base.OnDisable();
         Debug.Log("Flame is disabled");
 
@@ -25,9 +27,16 @@ public class FlameControl : BaseVFXControl
 
     public override void OnRelationDataUpdated(float distance, Vector3 centerPosition)
     {
-        transform.position = centerPosition;
+        if (distance <= FlameEnableRange)
+        {
+            Flame1.Play();
+            Flame2.Play();
 
-        float targetScale = baseScale + distance * scaleSensitivity;
-        transform.localScale = Vector3.one * targetScale;
+        }
+        else
+        {
+            Flame1.Stop();
+            Flame2.Stop();
+        }
     }
 }
