@@ -7,9 +7,8 @@ public class Dual_VFX_UIControl : MonoBehaviour
     public BaseVFXControl Flame;
 
     public BaseVFXControl Particle;
+    public BaseVFXControl Trails;
 
-    private bool isFlameEnable = false;
-    private bool isParticleEnable = false;
     public static event Action<bool> OnFlameEnableChange;
     public static event Action<bool> OnParticleEnableChange;
 
@@ -17,52 +16,48 @@ public class Dual_VFX_UIControl : MonoBehaviour
     {
         if (Flame != null)
         {
-            Flame.enabled = isFlameEnable;
+            Flame.enabled = false;
         }
         if (Particle != null)
         {
-            Particle.enabled = isParticleEnable;
+            Particle.enabled = false;
         }
     }
 
     public void ToggleFlame()
     {
-        isFlameEnable = !isFlameEnable;
-        Flame.enabled = isFlameEnable;
-        OnFlameEnableChange?.Invoke(isFlameEnable);
+        Flame.enabled = !Flame.enabled;
+        OnFlameEnableChange?.Invoke(Flame.enabled);
     }
 
     public void ToggleParticle()
     {
-        isParticleEnable = !isParticleEnable;
-        Particle.enabled = isParticleEnable;
-        OnParticleEnableChange?.Invoke(isParticleEnable);
+        Particle.enabled = Particle.enabled;
+        OnParticleEnableChange?.Invoke(Particle.enabled);
     }
 
     public void SetFlame(bool state)
     {
-        if (isFlameEnable == state)
+        if (Flame.enabled == state)
         {
             return;
         }
         else
         {
-            isFlameEnable = state;
-            Flame.enabled = isFlameEnable;
+            Flame.enabled = state;
         }
         // OnFlameEnableChange?.Invoke(isFlameEnable);
     }
 
     public void SetParticle(bool state)
     {
-        if (isParticleEnable == state)
+        if (Particle.enabled == state)
         {
             return;
         }
         else
         {
-            isParticleEnable = state;
-            Particle.enabled = isParticleEnable;
+            Particle.enabled = state;
         }
         // OnParticleEnableChange?.Invoke(isParticleEnable);
     }

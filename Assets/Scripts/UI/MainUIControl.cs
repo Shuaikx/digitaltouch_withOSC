@@ -45,6 +45,17 @@ public class MainUIControl : MonoBehaviour
         }
     }
 
+    public void ToggleHDR()
+        {
+#if UNITY_HAS_URP
+            UniversalRenderPipeline.asset.supportsHDR = !UniversalRenderPipeline.asset.supportsHDR;
+            var additionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
+            m_Camera.allowHDR = UniversalRenderPipeline.asset.supportsHDR;
+            additionalCameraData.allowHDROutput = UniversalRenderPipeline.asset.supportsHDR;
+            // UpdateHDRText();
+#endif
+        }
+
 
     public void DoQuit()
     {
