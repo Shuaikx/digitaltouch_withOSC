@@ -1,0 +1,51 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "4154996803",
+    "Type": "User",
+    "GUID": "{E2BE212F-8A69-46D2-953E-1FDED3AC92DD}",
+    "Language": "SFX",
+    "Hash": "{DBDF92E1-4AD2-7CAF-C68B-DFD0CCB6BCE8}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Test_SoundBank",
+    "ShortName": "Test_SoundBank",
+    "Path": "Test_SoundBank.bnk",
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "599271131",
+       "Name": "Sine",
+       "ObjectPath": "\\Actor-Mixer Hierarchy\\Default Work Unit\\Sine\\Sine",
+       "GUID": "{B655A558-4186-48B8-8B3C-BD7A98267F08}",
+       "LibName": "Wwise Sine",
+       "LibId": "6553602"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "4010112737",
+      "Name": "Play_Sine",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_Sine",
+      "GUID": "{2039F458-9D5A-44EF-8D57-2F6F26226597}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.1",
+      "DurationMax": "0.1",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "599271131"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ],
+  "FileHash": "{5CD9C730-3B3C-FCEC-103E-72BF1C5F62EA}"
+ }
+}
