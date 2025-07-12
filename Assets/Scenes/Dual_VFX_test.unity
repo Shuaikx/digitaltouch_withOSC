@@ -11384,53 +11384,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969654743}
   m_CullTransparentMesh: 1
---- !u!1 &1025827680
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1025827682}
-  - component: {fileID: 1025827681}
-  m_Layer: 0
-  m_Name: Passthhrough Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1025827681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025827680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa1dbc28a4384b55a4e1454927cca55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Camera: {fileID: 1732320013}
-  fadeDuration: 1
-  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
---- !u!4 &1025827682
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025827680}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1078293249
 GameObject:
   m_ObjectHideFlags: 0
@@ -11755,7 +11708,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 44161537210899533}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Dual_VFX_UIControl, Assembly-CSharp
         m_MethodName: ToggleTeapot
         m_Mode: 1
@@ -16078,7 +16031,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 44161537210899533}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Dual_VFX_UIControl, Assembly-CSharp
         m_MethodName: ToggleParticle
         m_Mode: 1
@@ -18136,21 +18089,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118504888}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &44161537210899533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4307331308194320349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 732e435d193104eceb39628550211ba7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Flame: {fileID: 17683606}
-  Particle: {fileID: 590980372}
-  Teapot: {fileID: 586521486}
 --- !u!223 &428005573864689473
 Canvas:
   m_ObjectHideFlags: 0
@@ -18174,21 +18112,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!4 &538501803760042373
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4307331308194320349}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.05016, y: 0, z: 0.98869}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &733186137679227523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18238,23 +18161,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &4307331308194320349
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 538501803760042373}
-  - component: {fileID: 44161537210899533}
-  m_Layer: 0
-  m_Name: Dual VFX UI Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &4524093123471821516
 GameObject:
   m_ObjectHideFlags: 0
@@ -18270,6 +18176,7 @@ GameObject:
   - component: {fileID: 72844398}
   - component: {fileID: 72844397}
   - component: {fileID: 72844399}
+  - component: {fileID: 6889468396213537505}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -18771,6 +18678,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6889468396213537505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4524093123471821516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732e435d193104eceb39628550211ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flame: {fileID: 17683606}
+  Particle: {fileID: 590980372}
+  Teapot: {fileID: 586521486}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -18788,7 +18710,6 @@ SceneRoots:
   - {fileID: 737640556}
   - {fileID: 764007522}
   - {fileID: 365094052}
-  - {fileID: 1025827682}
   - {fileID: 11197175}
   - {fileID: 1131014997}
   - {fileID: 557219932}
@@ -18799,7 +18720,6 @@ SceneRoots:
   - {fileID: 1763679853}
   - {fileID: 795656889}
   - {fileID: 5423332253655786679}
-  - {fileID: 538501803760042373}
   - {fileID: 3517273543217951934}
   - {fileID: 1319070419}
   - {fileID: 1430602783}
