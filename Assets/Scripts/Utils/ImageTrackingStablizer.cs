@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
@@ -40,7 +41,7 @@ public class ImageTrackingStablizer : MonoBehaviour
         {
             if (!m_IsRelocalizing || m_TrackedImagePoses == null || m_DesiredNumOfSamples == 0)
             {
-                return 0f; // 如果未开始重定位或目标样本数为0，则进度为0
+                return 0f;
             }
             return (float)m_TrackedImagePoses.Count / m_DesiredNumOfSamples;
         }
@@ -81,23 +82,28 @@ public class ImageTrackingStablizer : MonoBehaviour
     {
         m_IsRelocalizing = true;
         m_TrackedImagePoses = new();
-        m_ARTrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
+        Debug.Log("Tracked Image Poses is inited");
+        //m_ARTrackedImageManager.trackablesChanged += OnTrackedImagesChanged;
 
     }
 
     private void StopRelocalization()
     {
-        m_ARTrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
+        //m_ARTrackedImageManager.trackablesChanged -= OnTrackedImagesChanged;
         m_TrackedImagePoses = null;
         m_IsRelocalizing = false;
         OnProgressUpdated?.Invoke(0f); // 停止时重置进度
     }
 
-    private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs args)
+    public void OnTrackedImagesChanged(ARTrackablesChangedEventArgs<ARTrackedImage> eventArgs)
     {
-        if (args.updated.Count == 1)
+        if (!IsRelocalizing)
         {
-            var image = args.updated[0];
+            return;
+        }
+        if (eventArgs.updated.Count == 1)
+        {
+            var image = eventArgs.updated[0];
             if (image.trackingState == TrackingState.Tracking)
             {
                 TrackedImagePoseData poseData = new(image.transform.position, image.transform.rotation, Time.timeAsDouble);

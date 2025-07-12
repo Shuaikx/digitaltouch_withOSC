@@ -1,13 +1,15 @@
 using System.Collections;
 //using UnityEditorInternal;
 using UnityEngine;
+// using UnityEngine.Rendering.Universal;
+
 using UnityEngine.Rendering.Universal;
 
 public class MainUIControl : MonoBehaviour
 {
     public Camera m_Camera;
     public GameObject bloom;
-    private UniversalAdditionalCameraData m_UniversalAdditionalCameraData;
+    //private UniversalAdditionalCameraData m_UniversalAdditionalCameraData;
 
     [Tooltip("Main Camera")]
     [SerializeField] private float fadeDuration = 1.0f;
@@ -16,8 +18,15 @@ public class MainUIControl : MonoBehaviour
     [SerializeField] private bool isTransparent = true; 
     private Coroutine activeFadeCoroutine;
 
+    public static MainUIControl Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
+
         if (m_Camera == null)
         {
             Debug.LogError("ControlURPCameraPostProcessing: No Camera component found on this GameObject. This script requires a Camera component.", this);
@@ -25,19 +34,8 @@ public class MainUIControl : MonoBehaviour
             return;
         }
 
-        m_UniversalAdditionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
-        if (m_UniversalAdditionalCameraData == null)
-        {
-            Debug.LogError("ControlURPCameraPostProcessing: No UniversalAdditionalCameraData found on this Camera. Ensure URP is properly set up and the Camera has this component.", this);
-            enabled = false; // Disable the script if no URP camera data is found
-            return;
-        }
-
-        m_UniversalAdditionalCameraData.renderPostProcessing = false;
         if (bloom != null)
-        {
             bloom.SetActive(false);
-        }
     }
 
     private void Start()
@@ -46,68 +44,26 @@ public class MainUIControl : MonoBehaviour
         m_Camera.backgroundColor = Color.clear;
         isTransparent = true;
     }
-
-    public void TogglePostProcessing()
-    {
-        if (m_UniversalAdditionalCameraData != null)
-        {
-            m_UniversalAdditionalCameraData.renderPostProcessing = !m_UniversalAdditionalCameraData.renderPostProcessing;
-            Debug.Log($"Post Processing Toggled. Current state: {m_UniversalAdditionalCameraData.renderPostProcessing}");
-        }
-
-        if (bloom != null)
-        {
-            bloom.SetActive(!bloom.activeSelf);
-        }
-    }
     
-    public void SetPostProcessing(bool state)
-    {
-        if (m_UniversalAdditionalCameraData == state)
-        {
-            return;
-        }
-        
-        if (m_UniversalAdditionalCameraData != null)
-            {
-                m_UniversalAdditionalCameraData.renderPostProcessing = !m_UniversalAdditionalCameraData.renderPostProcessing;
-                Debug.Log($"Post Processing Toggled. Current state: {m_UniversalAdditionalCameraData.renderPostProcessing}");
-            }
-
-        if (bloom != null)
-        {
-            bloom.SetActive(!bloom.activeSelf);
-        }
-    }
 
     public void ToggleHDR()
     {
-#if UNITY_HAS_URP
-            UniversalRenderPipeline.asset.supportsHDR = !UniversalRenderPipeline.asset.supportsHDR;
-            var additionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
-            m_Camera.allowHDR = UniversalRenderPipeline.asset.supportsHDR;
-            additionalCameraData.allowHDROutput = UniversalRenderPipeline.asset.supportsHDR;
-            // UpdateHDRText();
-#endif
-    }
-
-    public void SetHDR(bool State)
-    {
-#if UNITY_HAS_URP
-        if (UniversalRenderPipeline.asset.supportsHDR == State)
-        {
-            return;
-        }
-
         UniversalRenderPipeline.asset.supportsHDR = !UniversalRenderPipeline.asset.supportsHDR;
         var additionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
         m_Camera.allowHDR = UniversalRenderPipeline.asset.supportsHDR;
         additionalCameraData.allowHDROutput = UniversalRenderPipeline.asset.supportsHDR;
-        // UpdateHDRText();
-#endif
     }
 
-    
+    public void TogglePostProcessing()
+    {
+        var additionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
+        additionalCameraData.renderPostProcessing = !additionalCameraData.renderPostProcessing;
+
+        if (bloom != null)
+        {
+            bloom.SetActive(!bloom.activeSelf);
+        }
+    }
 
     public void TogglePassthrough()
     {
@@ -123,12 +79,40 @@ public class MainUIControl : MonoBehaviour
         Debug.Log($"Toggle the passthrough to be {isTransparent}");
         activeFadeCoroutine = StartCoroutine(FadeColorCoroutine(targetColor, fadeDuration));
     }
-    public void SetPassthrough(bool state) 
+    
+    public void SetHDR(bool State)
+    {
+        if (UniversalRenderPipeline.asset.supportsHDR == State)
+            return;
+
+        UniversalRenderPipeline.asset.supportsHDR = !UniversalRenderPipeline.asset.supportsHDR;
+        var additionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
+        m_Camera.allowHDR = UniversalRenderPipeline.asset.supportsHDR;
+        additionalCameraData.allowHDROutput = UniversalRenderPipeline.asset.supportsHDR;
+    }
+
+    public void SetPostProcessing(bool state)
+    {
+        var additionalCameraData = m_Camera.GetUniversalAdditionalCameraData();
+        if (additionalCameraData.renderPostProcessing == state)
+            return;
+        
+        additionalCameraData.renderPostProcessing = !additionalCameraData.renderPostProcessing;
+
+        if (bloom != null)
+        {
+            if (bloom.activeSelf == state)
+                return;
+            
+            bloom.SetActive(!bloom.activeSelf);
+        }
+    }
+
+    public void SetPassthrough(bool state)
     {
         if (isTransparent == state)
-        {
             return;
-        }
+
         isTransparent = !isTransparent;
         Color targetColor = isTransparent ? Color.clear : backgroundColor;
 

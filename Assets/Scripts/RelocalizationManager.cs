@@ -1,5 +1,4 @@
 using UnityEngine;
-using HoloKit.ImageTrackingRelocalization;
 
 public class RelocalizationManager : MonoBehaviour
 {

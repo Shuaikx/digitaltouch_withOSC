@@ -68,7 +68,7 @@ public class NetworkHandsRelationManager : NetworkBehaviour
             return;
         }
 
-        playerManagers = FindObjectsOfType<NetworkHandsRelationManager>();
+        playerManagers = FindObjectsByType<NetworkHandsRelationManager>(FindObjectsSortMode.None);
 
         if (playerManagers.Length == 1)
         {
@@ -99,15 +99,35 @@ public class NetworkHandsRelationManager : NetworkBehaviour
                 networkCenterPosition.Value = center;
             }
         }
+
+        // for testing
+        updatePassthroughStateServerRpc();
     }
 
-    [ServerRpc(RequireOwnership =false)]
+    [ServerRpc(RequireOwnership = false)]
+    private void updatePassthroughStateServerRpc()
+    {
+        if (networkDistance.Value <= 0.1f)
+        {
+            MainUIControl.Instance.SetHDR(false);
+            MainUIControl.Instance.SetPostProcessing(false);
+            MainUIControl.Instance.SetPassthrough(false);
+        }
+        else
+        {
+            MainUIControl.Instance.SetHDR(true);
+            MainUIControl.Instance.SetPostProcessing(true);
+            MainUIControl.Instance.SetPassthrough(true);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     private void onFlameEnableChangServerRpc(bool state)
     {
         networkIsFlameEnable.Value = state;
     }
-    
-    [ServerRpc(RequireOwnership =false)]
+
+    [ServerRpc(RequireOwnership = false)]
     private void onTeapotEnableChangServerRpc(bool state)
     {
         networkIsTeapotEnable.Value = state;
@@ -118,10 +138,10 @@ public class NetworkHandsRelationManager : NetworkBehaviour
     {
         networkIsParticleEnable.Value = state;
     }
-    
+
     private void onNetworkTeapotEnableChange(bool previousState, bool currentState)
     {
-        if(IsOwner)
+        if (IsOwner)
             vfxUIController.SetTeapot(currentState);
     }
 
@@ -133,7 +153,9 @@ public class NetworkHandsRelationManager : NetworkBehaviour
 
     private void onNetworkParticleEnableChange(bool previousState, bool currentState)
     {
-        if(IsOwner)
+        if (IsOwner)
             vfxUIController.SetParticle(currentState);
     }
+    
+    
 }
